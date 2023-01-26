@@ -1,9 +1,12 @@
 from aiogram import types, Dispatcher
 from create_bot import bot, dp
 from keyboard import kb_client
+from aiogram.types import ReplyKeyboardRemove
+from qcf.global_fr import ozgarmas_buyruqlarni_saralash
+from qcf.global_or import *
 
 
-# @dp.message_handler(commands=['start', 'help'])git
+# @dp.message_handler(commands=['start', 'help'])
 async def command_start(message: types.Message):
     message = message
     try:
@@ -16,7 +19,7 @@ async def command_start(message: types.Message):
 
 # @dp.message_handler(commands=['ish_vaqti'])
 async def pizza_open_command(message: types.Message):
-    await bot.send_message(message.chat.id, "Du-Sha: 08:30 dan 23:30 gacha")
+    await bot.send_message(message.chat.id, "Du-Sha: 08:30 dan 23:30 gacha", reply_markup=ReplyKeyboardRemove())
 
 
 # @dp.message_handler(commands=['joylashuv'])
@@ -25,6 +28,11 @@ async def pizza_place_command(message: types.Message):
 
 
 def register_handler_client(dpr: Dispatcher):
-    dpr.register_message_handler(command_start, commands=['start', 'help'])
+    print(BUYRUQLAR['start'], BUYRUQLAR['help'])
+    print([*BUYRUQLAR['start'], *BUYRUQLAR['help']])
+    dpr.register_message_handler(command_start,
+                                 lambda m: ozgarmas_buyruqlarni_saralash(m) in [*BUYRUQLAR['start'], *BUYRUQLAR['help']])
     dpr.register_message_handler(pizza_open_command, commands=['ish_vaqti'])
     dpr.register_message_handler(pizza_place_command, commands=['joylashuv'])
+
+

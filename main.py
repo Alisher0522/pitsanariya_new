@@ -25,5 +25,7 @@ async def get_user_info(message: types.Message):
     await message.reply(text)
 
 # Start the bot
-if __name__ == '__main__':
-    start_polling(dp)
+# if __name__ == '__main__':
+#     start_polling(dp)
+
+
